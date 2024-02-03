@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "./ui/button";
 
 const Hero = () => {
   return (
@@ -15,12 +16,8 @@ const Hero = () => {
           Join the ZenSpace community and start your journey to tranquility.
         </p>
         <div>
-          <button className="bg-blue-500 text-white px-6 py-2 rounded-lg mr-4">
-            Download Now
-          </button>
-          <button className="bg-transparent text-blue-500 px-6 py-2 border border-blue-500 rounded-lg">
-            Learn More
-          </button>
+          <Button>Download Now</Button>
+          <Button variant="secondary">Learn More</Button>
         </div>
       </div>
     </section>

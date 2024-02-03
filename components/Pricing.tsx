@@ -1,4 +1,13 @@
 import React from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "./ui/button";
 
 const pricingPlans = [
   {
@@ -9,7 +18,7 @@ const pricingPlans = [
       "Basic Progress Tracking",
       "Limited Playlist Access",
     ],
-    cta: "Get Started", // Call to action text
+    cta: "Get Started",
     featured: false,
   },
   {
@@ -24,7 +33,7 @@ const pricingPlans = [
     cta: "Start Free Trial",
     featured: true,
   },
-  // ... add more plans as needed
+  // Add more plans as needed
 ];
 
 const PricingCard: React.FC<{
@@ -37,35 +46,43 @@ const PricingCard: React.FC<{
   };
 }> = ({ plan }) => {
   return (
-    <div
-      className={`pricing-card p-6 text-center rounded-lg shadow-md ${
-        plan.featured ? "bg-blue-500 text-white" : "bg-white"
+    <Card
+      className={`rounded-lg shadow-md ${
+        plan.featured ? "bg-primary text-white" : "bg-white"
       }`}
     >
-      <h3 className="text-xl font-semibold mb-4">{plan.name} Plan</h3>
-      <p
-        className={`text-4xl font-bold ${
-          !plan.featured && "text-blue-500"
-        } mb-6`}
-      >
-        ${plan.price}
-        <span className="text-lg">/mo</span>
-      </p>
-      <ul className="mb-6">
-        {plan.features.map((feature, index) => (
-          <li key={index} className="mb-2">
-            {feature}
-          </li>
-        ))}
-      </ul>
-      <button
-        className={`py-2 px-6 rounded-lg shadow-lg ${
-          plan.featured ? "bg-white text-blue-500" : "bg-blue-500 text-white"
-        } hover:opacity-90`}
-      >
-        {plan.cta}
-      </button>
-    </div>
+      <CardHeader>
+        <CardTitle>{plan.name} Plan</CardTitle>
+        <CardDescription>
+          <p
+            className={`text-4xl font-bold ${!plan.featured && "text-primary"}`}
+          >
+            ${plan.price}
+            <span className="text-lg">/mo</span>
+          </p>
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <ul>
+          {plan.features.map((feature, index) => (
+            <li key={index} className="mb-2">
+              {feature}
+            </li>
+          ))}
+        </ul>
+      </CardContent>
+      <CardFooter>
+        <Button
+          className={`py-2 px-6 rounded-lg shadow-lg ${
+            plan.featured
+              ? "bg-secondary text-primary"
+              : "bg-primary text-white"
+          } hover:opacity-90 transition duration-300`}
+        >
+          {plan.cta}
+        </Button>
+      </CardFooter>
+    </Card>
   );
 };
 

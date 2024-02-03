@@ -1,31 +1,10 @@
-import React, { useState } from "react";
-
-type FaqItemProps = {
-  question: string;
-  answer: string;
-};
-
-const FaqItem: React.FC<FaqItemProps> = ({ question, answer }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggle = () => {
-    setIsOpen(!isOpen);
-  };
-
-  return (
-    <div className="faq-item mb-2">
-      <button
-        className="faq-question text-left w-full p-4 bg-blue-100 text-blue-700 font-semibold"
-        onClick={toggle}
-      >
-        {question}
-      </button>
-      {isOpen && (
-        <div className="faq-answer p-4 border-t border-blue-200">{answer}</div>
-      )}
-    </div>
-  );
-};
+import React from "react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const FAQ = () => {
   const faqs = [
@@ -39,7 +18,7 @@ const FAQ = () => {
       answer:
         "Yes, ZenSpace offers a 7-day free trial for you to explore the features before committing to a subscription.",
     },
-    // ...add more FAQs as needed
+    // Add more FAQs as needed
   ];
 
   return (
@@ -48,11 +27,14 @@ const FAQ = () => {
         <h2 className="text-3xl font-bold text-center mb-8">
           Frequently Asked Questions
         </h2>
-        <div className="faq-list divide-y divide-blue-200">
+        <Accordion type="single" collapsible>
           {faqs.map((faq, index) => (
-            <FaqItem key={index} question={faq.question} answer={faq.answer} />
+            <AccordionItem key={index} value={`item-${index}`}>
+              <AccordionTrigger>{faq.question}</AccordionTrigger>
+              <AccordionContent>{faq.answer}</AccordionContent>
+            </AccordionItem>
           ))}
-        </div>
+        </Accordion>
       </div>
     </section>
   );
